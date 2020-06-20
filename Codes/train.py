@@ -483,9 +483,9 @@ with tf.Session(config=config) as sess:
             TP+=a; FP+=b;TN+=c; FN+=d
             prec=metrics(TP,FP,TN,FN)
             
-            print("Iter " + str(step*batch_size) + ", Loss= " + str(cost) +  \)
+            print("Iter " + str(step*batch_size) + ", Loss= " + str(cost) +  \
               ", epoch= " + str(epoch_iter)+ \
-              ", batch= "+ str(iter_tamp) +  ", acc= "+ str(acc)+ ", precision= "+str(prec)
+              ", batch= "+ str(iter_tamp) +  ", acc= "+ str(acc)+ ", precision= "+str(prec))
               
 
         if step % 100== 0:
@@ -519,7 +519,7 @@ with tf.Session(config=config) as sess:
 
         if step % 500 ==0: 
             save_path=saver.save(sess,'../model/final_model_nist.ckpt')
-            print('model saved ..........#epoch->'+str(epoch_iter)
+            print('model saved ..........#epoch->'+str(epoch_iter))
     print("Optimization Finished!")
 
 
