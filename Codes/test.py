@@ -124,7 +124,7 @@ with tf.device('/gpu:1'):
 
         weights = np.zeros((filter_size,filter_size,number_of_classes,number_of_classes), dtype=np.float32)    
         upsample_kernel = upsample_filt(filter_size)    
-        for i in xrange(number_of_classes):        
+        for i in range(number_of_classes):        
             weights[:, :, i, i] = upsample_kernel    
         return weights
 
@@ -265,7 +265,7 @@ config.gpu_options.allow_growth=True
 with tf.Session(config=config) as sess:
     sess.run(init) 
     saver.restore(sess,'../model/final_model_nist.ckpt')	
-    print 'session starting .................!!!!' 
+    print('session starting .................!!!!') 
     subtract_mean=True
 
     # loading NC16 data
@@ -290,13 +290,13 @@ with tf.Session(config=config) as sess:
         nTx[imNb-n1]=tx[imNb] 
         nTy[imNb-n1]=ty[imNb]
         nTx1[imNb-n1]=freq4[imNb]
-    print np.shape(nTx)
-    print np.shape(nTy)
-    print np.shape(nTx1)
+    print(np.shape(nTx))
+    print(np.shape(nTy))
+    print(np.shape(nTx1))
     ty_prime=conv_mask_gt(nTy)
     final_predictions, final_probabilities,y2=sess.run([mask_pred,probabilities,mask_actual], feed_dict={input_layer: nTx, y:ty_prime, freqFeat: nTx1})
-    print np.shape(final_predictions)
-    print np.shape(final_probabilities)
+    print(np.shape(final_predictions))
+    print(np.shape(final_probabilities))
 
     #sio.savemat('pred_res.mat',{'img':nTx,'labels':nTy,'pred':final_predictions,'prob':final_probabilities,'gT':y2})
     nb = 0
