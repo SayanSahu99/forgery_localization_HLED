@@ -32,9 +32,9 @@ from skimage import img_as_uint
 #imagefpath = os.path.join(thispath,imagefname)
 
 # load image file
-hdf5_file = h5py.File('../test_data/test_imgs_feat_v2.hdf5', mode='w')
+hdf5_file = h5py.File('/content/forgery_localization_HLED/test_data/test_imgs_feat_v2.hdf5', mode='w')
 
-hdf5=h5py.File('../test_data/test_imgs_v2.hdf5','r')
+hdf5=h5py.File('/content/forgery_localization_HLED/test_data/test_imgs_v2.hdf5','r')
 imgs=np.array(hdf5['test_img'])
 hdf5.close()
 
