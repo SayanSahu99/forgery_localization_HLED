@@ -259,15 +259,17 @@ config.gpu_options.allow_growth=True
 
 with tf.Session(config=config) as sess:
     sess.run(init) 
-    saver.restore(sess,'../model/final_model_nist.ckpt')
+    saver.restore(sess,'/content/forgery_localization_HLED/model/final_model_nist.ckpt')
     print('session starting .................!!!!') 
 
+    # ../data/train_data_feat_v2.hdf5
     # loading data
-    feat1=h5py.File('../data/train_data_feat_v2.hdf5','r')
+    feat1=h5py.File('/content/forgery_localization_HLED/test_data/test_imgs_feat_v2.hdf5','r')
     freq1=np.array(feat1["feat"])
     feat1.close()
     mx=127.0
-    hdf5_file=h5py.File('../data/train_data.hdf5','r')
+    # ../data/train_data.hdf5
+    hdf5_file=h5py.File('/content/forgery_localization_HLED/test_data/test_imgs_v2.hdf5','r')
     Img=np.array(hdf5_file["train_img"])
     #Img=np.uint8(Img)
     #Img=np.multiply(Img,1.0/mx)
