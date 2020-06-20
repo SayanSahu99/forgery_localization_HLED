@@ -121,7 +121,7 @@ with tf.device('/gpu:1'):
 
         weights = np.zeros((filter_size,filter_size,number_of_classes,number_of_classes), dtype=np.float32)    
         upsample_kernel = upsample_filt(filter_size)    
-        for i in xrange(number_of_classes):        
+        for i in range(number_of_classes):        
             weights[:, :, i, i] = upsample_kernel    
         return weights
 
