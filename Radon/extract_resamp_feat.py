@@ -119,7 +119,7 @@ for q in range(0,np.shape(imgs)[0]):
 		npresult=np.transpose(npresult,(3,0,1,2))
 		
 		npresult=np.reshape(npresult,(64,240))
-		print "feature extrating for image # "+ str(q+1)+", with shape-->"+str(np.shape(npresult))
+		print("feature extrating for image # "+ str(q+1)+", with shape-->"+str(np.shape(npresult)))
 		#print("FFT calculations took "+str(time.time()-beftime)+" seconds")
 		#describe("npresult", npresult)
 		hdf5_file["feat"][q, ...] = npresult[None]
