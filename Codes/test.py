@@ -1,7 +1,6 @@
 
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
-from tf.python.client import device_lib
+import tensorflow as tf
+from tensorflow.python.client import device_lib
 #from tensorflow.python.ops import rnn, rnn_cell
 from tensorflow.contrib import rnn
 import numpy as np
