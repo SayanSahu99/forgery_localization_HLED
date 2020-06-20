@@ -50,8 +50,8 @@ for q in range(0,np.shape(imgs)[0]):
 	patchsize=32
 	# reshape to a list of patches
 	rgb_patches = view_as_windows(im,(32,32,3),32)
-        rgb_patches = np.squeeze(rgb_patches)
-        listofpatches = np.reshape(rgb_patches,(64,32,32,3))
+	rgb_patches = np.squeeze(rgb_patches)
+	listofpatches = np.reshape(rgb_patches,(64,32,32,3))
 	#listofpatches = orig_object.reshape((1, patchsize, patchsize, 3))
 	#print("patches array reshaped to list of patches with shape "+str(listofpatches.shape))
 
