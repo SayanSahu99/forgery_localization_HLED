@@ -260,7 +260,7 @@ config.gpu_options.allow_growth=True
 with tf.Session(config=config) as sess:
     sess.run(init) 
     saver.restore(sess,'../model/final_model_nist.ckpt')
-    print 'session starting .................!!!!' 
+    print('session starting .................!!!!') 
 
     # loading data
     feat1=h5py.File('../data/train_data_feat_v2.hdf5','r')
@@ -290,9 +290,9 @@ with tf.Session(config=config) as sess:
     #nI=np.uint8(nI)
     #nI=np.multiply(nI,1.0/mx)
     nb_nist_img=np.shape(nI)[0]-batch_size
-    print np.shape(nI)
+    print(np.shape(nI))
     nL=np.array(nist["train_labels"])
-    print np.shape(nL)	
+    print(np.shape(nL))	
 
     subtract_mean = False
     step = 1
@@ -302,7 +302,7 @@ with tf.Session(config=config) as sess:
     nist.close()
 
     # Keep training until reach max iterations
-    print 'epoch 1 sarted......'
+    print('epoch 1 sarted......')
     
     # loading nc_2017_eval_set 
     feat3=h5py.File('../data/eval_set_v3_feat_v2.hdf5','r')
@@ -314,9 +314,9 @@ with tf.Session(config=config) as sess:
     #nc17_img=np.uint8(nc17_img)
     #nc17_img=np.multiply(nc17_img,1.0/mx)
     nb_nc17_img=np.shape(nc17_img)[0]
-    print np.shape(nc17_img)
+    print(np.shape(nc17_img))
     nc17_lab=np.array(nc17["test_labels"])
-    print np.shape(nc17_lab)
+    print(np.shape(nc17_lab))
 
     subtract_mean = True
     step = 1
@@ -333,9 +333,9 @@ with tf.Session(config=config) as sess:
 
     hdf5_file=h5py.File('../data/nc16_FT_v1.hdf5','r')
     Img_NC16=np.array(hdf5_file["train_img"])
-    print np.shape(Img_NC16)
+    print(np.shape(Img_NC16))
     Lab_NC16=np.array(hdf5_file["train_labels"])
-    print np.shape(Lab_NC16)
+    print(np.shape(Lab_NC16))
     nb_nc16_img=np.shape(Img_NC16)[0]
     tx=np.array(hdf5_file['test_img'])
     tx=np.float32(tx)
@@ -354,7 +354,7 @@ with tf.Session(config=config) as sess:
     # separate out the training set from val set
     nI=nI[:-batch_size]
     nL=nL[:-batch_size]
-    print np.shape(nI)
+    print(np.shape(nI))
 
     feat4=h5py.File('../data/nc16_test_feat.hdf5','r')
     freq4=np.array(feat4["feat"])
@@ -362,7 +362,7 @@ with tf.Session(config=config) as sess:
     # finished data loading
 
     # Keep training until reach max iterations
-    print 'epoch 1 sarted......'
+    print('epoch 1 sarted......')
 
     ## tunable parameters
     epoch_iter=0;
@@ -388,7 +388,7 @@ with tf.Session(config=config) as sess:
 
     while step * batch_size < training_iters:
         if (iter_nc16 % epoch_iter_nc16)==0:
-            #print "data loading for nc16 ..."
+            #print("data loading for nc16 ..."
             iter_nc16=0		
             in_size=np.shape(Img_NC16)[0]
             arr_ind=np.arange(in_size)
@@ -402,7 +402,7 @@ with tf.Session(config=config) as sess:
             fr_nc16=fr_nc16[:(np.shape(arr_ind)[0]/bnctamp)*bnctamp,...]
 
         if (iter_tamp % epoch_iter_tamp)==0:
-            print "data loading for synthesized images ..."
+            print("data loading for synthesized images ...")
             iter_tamp=0
             in_size=nb_tamp_img
             arr_ind=np.arange(in_size)
@@ -412,14 +412,14 @@ with tf.Session(config=config) as sess:
             Y2 = Lab[arr_ind, ...]
             fr2=freq1[arr_ind, ...]
             epoch_iter+=1
-            print "epoch finished..starting next epoch..>>>"
+            print("epoch finished..starting next epoch..>>>")
 
             im2=im2[:(np.shape(arr_ind)[0]/bTamp)*bTamp,...]
             Y2=Y2[:(np.shape(arr_ind)[0]/bTamp)*bTamp,...]
             fr2=fr2[:(np.shape(arr_ind)[0]/bTamp)*bTamp,...]
 
         if (iter_nist % epoch_iter_nist)==0:
-            print "data loading for mfc18 images ..."
+            print("data loading for mfc18 images ...")
             iter_nist=0
             in_size=np.shape(nI)[0]
             arr_ind=np.arange(in_size)
@@ -433,7 +433,7 @@ with tf.Session(config=config) as sess:
             fr3=fr3[:(np.shape(arr_ind)[0]/bNist)*bNist,...]
 
         if (iter_nc17 % epoch_iter_nc17)==0:
-            print "data loading for nc17 eval images ..."
+            print("data loading for nc17 eval images ...")
             iter_nc17=0
             in_size=np.shape(nc17_img)[0]
             arr_ind=np.arange(in_size)
@@ -483,7 +483,7 @@ with tf.Session(config=config) as sess:
             TP+=a; FP+=b;TN+=c; FN+=d
             prec=metrics(TP,FP,TN,FN)
             
-            print "Iter " + str(step*batch_size) + ", Loss= " + str(cost) +  \
+            print("Iter " + str(step*batch_size) + ", Loss= " + str(cost) +  \)
               ", epoch= " + str(epoch_iter)+ \
               ", batch= "+ str(iter_tamp) +  ", acc= "+ str(acc)+ ", precision= "+str(prec)
               
@@ -511,16 +511,16 @@ with tf.Session(config=config) as sess:
             if prec > best_acc :
                 best_prec = prec
                 save_path=saver.save(sess,'../model/final_model_nist.ckpt')
-                print "Best Model Found on NC16..."
+                print("Best Model Found on NC16...")
             
-            print  "prec = "+str(prec)+"("+str(best_prec)+")" + ", acc = "+ str(test_accuracy)
+            print( "prec = "+str(prec)+"("+str(best_prec)+")" + ", acc = "+ str(test_accuracy))
             
         step += 1
 
         if step % 500 ==0: 
             save_path=saver.save(sess,'../model/final_model_nist.ckpt')
-            print 'model saved ..........#epoch->'+str(epoch_iter)
-    print "Optimization Finished!"
+            print('model saved ..........#epoch->'+str(epoch_iter)
+    print("Optimization Finished!")
 
 
     
