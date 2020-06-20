@@ -1,6 +1,7 @@
 
-import tensorflow as tf
-from tensorflow.python.client import device_lib
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+from tf.python.client import device_lib
 #from tensorflow.python.ops import rnn, rnn_cell
 from tensorflow.contrib import rnn
 import numpy as np
@@ -264,17 +265,18 @@ config.gpu_options.allow_growth=True
 
 with tf.Session(config=config) as sess:
     sess.run(init) 
-    saver.restore(sess,'../model/final_model_nist.ckpt')	
+    # ../model/final_model_nist.ckpt
+    saver.restore(sess,'/content/forgery_localization_HLED/model/final_model_nist.ckpt')	
     print('session starting .................!!!!') 
     subtract_mean=True
 
     # loading NC16 data
     mx=127.0
-    feat4=h5py.File('../test_data/test_imgs_feat_v2.hdf5','r')
+    feat4=h5py.File('/content/forgery_localization_HLED/test_data/test_imgs_feat_v2.hdf5','r')
     freq4=np.array(feat4["feat"])
     feat4.close()
 
-    hdf5_file=h5py.File('../test_data/test_imgs_v2.hdf5','r')
+    hdf5_file=h5py.File('/content/forgery_localization_HLED/test_data/test_imgs_v2.hdf5','r')
 
     tx=np.array(hdf5_file['test_img'])
     tx=np.float32(tx)
